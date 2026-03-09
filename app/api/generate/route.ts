@@ -50,6 +50,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const expected = process.env.ACCESS_PASSPHRASE;
+    if (expected) {
+      const passphrase = req.headers.get('x-passphrase');
+      if (passphrase !== expected) {
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+      }
+    }
+
     const { thought, questionnaire } = await req.json();
 
     if (!thought?.trim()) {

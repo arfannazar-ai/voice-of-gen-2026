@@ -61,9 +61,13 @@ export default function ThoughtDump({ questionnaireData, onGenerate }: Props) {
     setOutput('');
 
     try {
+      const passphrase = localStorage.getItem('vog2026_auth') ?? '';
       const res = await fetch('/api/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-passphrase': passphrase,
+        },
         body: JSON.stringify({ thought, questionnaire: questionnaireData }),
       });
 
