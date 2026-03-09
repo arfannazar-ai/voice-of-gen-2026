@@ -43,6 +43,13 @@ Just write the thing.`;
 
 export async function POST(req: NextRequest) {
   try {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return new Response(
+        JSON.stringify({ error: 'ANTHROPIC_API_KEY is not set. Add it to .env.local and restart the server.' }),
+        { status: 500 }
+      );
+    }
+
     const { thought, questionnaire } = await req.json();
 
     if (!thought?.trim()) {

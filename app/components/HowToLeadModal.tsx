@@ -65,12 +65,14 @@ export default function HowToLeadModal({ isOpen, onClose }: Props) {
                 border: '1px solid rgba(255,0,0,0.2)',
                 boxShadow: '0 0 60px rgba(255,0,0,0.08), 0 24px 64px rgba(0,0,0,0.6)',
                 pointerEvents: 'auto',
+                maxHeight: 'calc(100vh - 48px)',
+                overflowY: 'auto',
               }}
             >
               {/* Header */}
               <div
-                className="flex items-center justify-between px-6 py-5"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+                className="flex items-center justify-between px-6"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', paddingBottom: '20px' }}
               >
                 <div>
                   <div className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: '#FF0000' }}>
@@ -88,34 +90,46 @@ export default function HowToLeadModal({ isOpen, onClose }: Props) {
               </div>
 
               {/* Steps */}
-              <div className="p-6 space-y-4">
+              <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
                 {STEPS.map((step, i) => (
                   <motion.div
                     key={step.num}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 + i * 0.07, duration: 0.3 }}
-                    className="flex gap-4"
+                    style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}
                   >
-                    {/* Number */}
+                    {/* Number badge */}
                     <div
-                      className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black"
                       style={{
+                        flexShrink: 0,
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.65rem',
+                        fontWeight: 900,
+                        letterSpacing: '0.05em',
+                        marginTop: '2px',
                         background: i === 0 ? 'rgba(0,51,153,0.2)' : i === 1 ? 'rgba(255,0,0,0.1)' : i === 2 ? 'rgba(0,170,102,0.12)' : 'rgba(255,0,0,0.1)',
-                        color: i === 0 ? '#4477dd' : i === 1 ? '#ff4444' : i === 2 ? '#44cc88' : '#ff4444',
-                        border: `1px solid ${i === 0 ? 'rgba(0,51,153,0.3)' : i === 1 ? 'rgba(255,0,0,0.2)' : i === 2 ? 'rgba(0,170,102,0.2)' : 'rgba(255,0,0,0.2)'}`,
+                        color: i === 0 ? '#4477dd' : i === 1 ? '#ff5555' : i === 2 ? '#44cc88' : '#ff5555',
+                        border: `1px solid ${i === 0 ? 'rgba(0,51,153,0.3)' : i === 1 ? 'rgba(255,0,0,0.25)' : i === 2 ? 'rgba(0,170,102,0.25)' : 'rgba(255,0,0,0.25)'}`,
                       }}
                     >
                       {step.num}
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <span className="font-bold text-white text-sm">{step.title}</span>
-                        <span className="text-xs truncate" style={{ color: '#FF0000', opacity: 0.7 }}>{step.label}</span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ marginBottom: '4px' }}>
+                        <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.9rem' }}>{step.title}</span>
                       </div>
-                      <p className="text-xs leading-relaxed" style={{ color: '#8888a0' }}>
+                      <div style={{ marginBottom: '8px' }}>
+                        <span style={{ fontSize: '0.72rem', color: '#FF0000', opacity: 0.75, fontWeight: 600, letterSpacing: '0.01em' }}>{step.label}</span>
+                      </div>
+                      <p style={{ fontSize: '0.8rem', lineHeight: 1.65, color: '#8888a0', margin: 0 }}>
                         {step.body}
                       </p>
                     </div>

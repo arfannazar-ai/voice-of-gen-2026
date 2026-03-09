@@ -91,7 +91,11 @@ export default function ThoughtDump({ questionnaireData, onGenerate }: Props) {
 
       onGenerate(thought, full);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Something went wrong');
+      if (e instanceof TypeError && e.message === 'Failed to fetch') {
+        setError('Could not reach the server. Make sure the dev server is running and ANTHROPIC_API_KEY is set in .env.local.');
+      } else {
+        setError(e instanceof Error ? e.message : 'Something went wrong');
+      }
     } finally {
       setIsGenerating(false);
     }

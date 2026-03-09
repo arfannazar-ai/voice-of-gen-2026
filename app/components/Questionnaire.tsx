@@ -189,18 +189,30 @@ export default function Questionnaire({ onComplete, onOpenGuide }: Props) {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleMoodSelect(opt.value)}
-                  className="w-full text-left p-4 rounded-xl transition-all duration-200 flex items-start gap-4"
+                  className="w-full text-left rounded-xl transition-all duration-200 flex items-center gap-4"
                   style={{
                     background: data.mood === opt.value ? 'rgba(0, 51, 153, 0.2)' : '#1e1e22',
                     border: data.mood === opt.value
                       ? '1px solid #003399'
                       : '1px solid rgba(255,255,255,0.06)',
+                    padding: '14px 16px',
+                    minHeight: '64px',
                   }}
                 >
-                  <span className="text-2xl">{opt.emoji}</span>
-                  <div>
-                    <div className="font-bold text-white">{opt.value}</div>
-                    <div className="text-xs mt-1" style={{ color: '#8888a0' }}>{opt.description}</div>
+                  <span
+                    style={{
+                      fontSize: '1.25rem',
+                      width: '32px',
+                      flexShrink: 0,
+                      textAlign: 'center',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {opt.emoji}
+                  </span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div className="font-bold text-white" style={{ lineHeight: 1.2 }}>{opt.value}</div>
+                    <div className="text-xs" style={{ color: '#8888a0', marginTop: '3px', lineHeight: 1.4 }}>{opt.description}</div>
                   </div>
                 </motion.button>
               ))}
